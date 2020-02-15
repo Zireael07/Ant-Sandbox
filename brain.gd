@@ -24,10 +24,13 @@ func _process(delta):
 	#print("Rel pos: " + str(rel_pos) + " abs y: " + str(abs(rel_pos.y)))
 	
 	# steering behavior
-	var steer = get_steering_arrive(target)
+	#var steer = get_steering_arrive(target)
+	# slightly more complex behavior
+	var steer = wander_in_field()
 	# normal case
 	vel += steer
-	
+	# don't exceed max speed
+	vel = vel.clamped(max_vel)
 	
 	var a = fix_atan(vel.x,vel.y)
 	
